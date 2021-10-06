@@ -1,0 +1,24 @@
+{
+    "name": "actuallyconnor/sdk-budget",
+    "description": "SDK for budget",
+    "license": "proprietary",
+    "require": {
+        "php": "~8.0",
+        "ramsey/uuid": "^4.2",
+        "moneyphp/money": "^4.0",
+        "guzzlehttp/guzzle": "^7.3"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^9.5"
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Budget\\": "tests/src"
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Actuallyconnnor\\Budget\\": "src/"
+        }
+    }
+}

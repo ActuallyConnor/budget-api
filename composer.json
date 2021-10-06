@@ -1,16 +1,17 @@
 {
-    "name": "laravel/laravel",
+    "name": "actuallyconnor/budget",
     "type": "project",
-    "description": "The Laravel Framework.",
-    "keywords": ["framework", "laravel"],
-    "license": "MIT",
+    "description": "Budget API",
+    "license": "proprietary",
     "require": {
-        "php": "^7.3|^8.0",
+        "php": "^8.0",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
         "laravel/framework": "^8.54",
         "laravel/sanctum": "^2.11",
-        "laravel/tinker": "^2.5"
+        "laravel/tinker": "^2.5",
+        "ramsey/uuid": "^4.2",
+        "moneyphp/money": "^4.0"
     },
     "require-dev": {
         "facade/ignition": "^2.5",
@@ -24,7 +25,8 @@
         "psr-4": {
             "App\\": "app/",
             "Database\\Factories\\": "database/factories/",
-            "Database\\Seeders\\": "database/seeders/"
+            "Database\\Seeders\\": "database/seeders/",
+            "Budget\\": "sdk/src/"
         }
     },
     "autoload-dev": {
