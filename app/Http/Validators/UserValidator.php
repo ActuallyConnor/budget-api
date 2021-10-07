@@ -19,7 +19,7 @@ final class UserValidator
         $validator = Validator::make($data, [
             'id'        => [
                 'nullable',
-                'int'
+                'integer'
             ],
             'uuid'      => [
                 'required',
