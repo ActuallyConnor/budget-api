@@ -8,40 +8,110 @@ use Ramsey\Uuid\UuidInterface;
 
 final class User
 {
+    /**
+     * @var int|null
+     */
     private ?int $id;
 
+    /**
+     * @var UuidInterface
+     */
     private UuidInterface $uuid;
 
+    /**
+     * @var string
+     */
     private string $firstName;
 
+    /**
+     * @var string
+     */
     private string $lastName;
 
+    /**
+     * @var string
+     */
     private string $email;
 
+    /**
+     * @var bool
+     */
     private bool $isAdmin;
 
+    /**
+     * @var string|null
+     */
     private ?string $address;
 
+    /**
+     * @var string|null
+     */
     private ?string $city;
 
+    /**
+     * @var string|null
+     */
     private ?string $country;
 
+    /**
+     * @var string|null
+     */
     private ?string $postalZip;
 
+    /**
+     * @var string
+     */
     private string $locale;
 
+    /**
+     * @var string|null
+     */
     private ?string $phone;
 
+    /**
+     * @var DateTimeInterface|null
+     */
     private ?DateTimeInterface $dob;
 
+    /**
+     * @var int|null
+     */
     private ?int $sexCode;
 
+    /**
+     * @var array
+     */
     private array $settings;
 
+    /**
+     * @var string|null
+     */
     private ?string $profileImage;
 
+    /**
+     * @var bool
+     */
     private bool $active;
 
+    /**
+     * @param  int|null  $id
+     * @param  UuidInterface  $uuid
+     * @param  string  $firstName
+     * @param  string  $lastName
+     * @param  string  $email
+     * @param  bool  $isAdmin
+     * @param  string|null  $address
+     * @param  string|null  $city
+     * @param  string|null  $country
+     * @param  string|null  $postalZip
+     * @param  string  $locale
+     * @param  string|null  $phone
+     * @param  DateTimeInterface|null  $dob
+     * @param  int|null  $sexCode
+     * @param  array  $settings
+     * @param  string|null  $profileImage
+     * @param  bool  $active
+     */
     public function __construct(
         ?int $id,
         UuidInterface $uuid,
@@ -81,6 +151,9 @@ final class User
         $this->active       = $active;
     }
 
+    /**
+     * @return bool
+     */
     public function hasId(): bool
     {
         return ! is_null($this->id);
@@ -138,6 +211,9 @@ final class User
         return $this->isAdmin;
     }
 
+    /**
+     * @return bool
+     */
     public function hasAddress(): bool
     {
         return ! is_null($this->address);
@@ -155,6 +231,9 @@ final class User
         return $this->address;
     }
 
+    /**
+     * @return bool
+     */
     public function hasCity(): bool
     {
         return ! is_null($this->city);
@@ -172,6 +251,9 @@ final class User
         return $this->city;
     }
 
+    /**
+     * @return bool
+     */
     public function hasCountry(): bool
     {
         return ! is_null($this->country);
@@ -189,6 +271,9 @@ final class User
         return $this->country;
     }
 
+    /**
+     * @return bool
+     */
     public function hasPostalZip(): bool
     {
         return ! is_null($this->postalZip);
@@ -214,6 +299,9 @@ final class User
         return $this->locale;
     }
 
+    /**
+     * @return bool
+     */
     public function hasPhone(): bool
     {
         return ! is_null($this->phone);
@@ -231,6 +319,9 @@ final class User
         return $this->phone;
     }
 
+    /**
+     * @return bool
+     */
     public function hasDob(): bool
     {
         return ! is_null($this->dob);
@@ -248,6 +339,9 @@ final class User
         return $this->dob;
     }
 
+    /**
+     * @return bool
+     */
     public function hasSexCode(): bool
     {
         return ! is_null($this->sexCode);
@@ -273,6 +367,9 @@ final class User
         return $this->settings;
     }
 
+    /**
+     * @return bool
+     */
     public function hasProfileImage(): bool
     {
         return ! is_null($this->profileImage);

@@ -1,13 +1,12 @@
 <?php
 
-namespace Budget\Accounts\Account;
+namespace Budget\Categories\Category;
 
-use DateTimeInterface;
 use LogicException;
 use Money\Money;
 use Ramsey\Uuid\UuidInterface;
 
-final class Account
+final class Category
 {
     /**
      * @var int|null
@@ -25,51 +24,42 @@ final class Account
     private ?int $userId;
 
     /**
-     * @var DateTimeInterface
-     */
-    private DateTimeInterface $dateOpened;
-
-    /**
      * @var string
      */
-    private string $name;
+    private string $label;
 
     /**
      * @var Money
      */
-    private Money $balance;
+    private Money $budgeted;
 
     /**
-     * @var Money
+     * @var int|null
      */
-    private Money $interest;
+    private ?int $parentCategoryId;
 
     /**
      * @param  int|null  $id
      * @param  UuidInterface  $uuid
      * @param  int|null  $userId
-     * @param  DateTimeInterface  $dateOpened
-     * @param  string  $name
-     * @param  Money  $balance
-     * @param  Money  $interest
+     * @param  string  $label
+     * @param  Money  $budgeted
+     * @param  int|null  $parentCategoryId
      */
     public function __construct(
-
         ?int $id,
         UuidInterface $uuid,
         ?int $userId,
-        DateTimeInterface $dateOpened,
-        string $name,
-        Money $balance,
-        Money $interest
+        string $label,
+        Money $budgeted,
+        ?int $parentCategoryId
     ) {
-        $this->id         = $id;
-        $this->uuid       = $uuid;
-        $this->userId     = $userId;
-        $this->dateOpened = $dateOpened;
-        $this->name       = $name;
-        $this->balance    = $balance;
-        $this->interest   = $interest;
+        $this->id               = $id;
+        $this->uuid             = $uuid;
+        $this->userId           = $userId;
+        $this->label            = $label;
+        $this->budgeted         = $budgeted;
+        $this->parentCategoryId = $parentCategoryId;
     }
 
     /**
@@ -85,10 +75,6 @@ final class Account
      */
     public function getId(): int
     {
-        if (is_null($this->id)) {
-            throw new LogicException('Id is not set');
-        }
-
         return $this->id;
     }
 
@@ -121,34 +107,39 @@ final class Account
     }
 
     /**
-     * @return DateTimeInterface
-     */
-    public function getDateOpened(): DateTimeInterface
-    {
-        return $this->dateOpened;
-    }
-
-    /**
      * @return string
      */
-    public function getName(): string
+    public function getLabel(): string
     {
-        return $this->name;
+        return $this->label;
     }
 
     /**
      * @return Money
      */
-    public function getBalance(): Money
+    public function getBudgeted(): Money
     {
-        return $this->balance;
+        return $this->budgeted;
     }
 
     /**
-     * @return Money
+     * @return bool
      */
-    public function getInterest(): Money
+    public function hasParentCategoryId(): bool
     {
-        return $this->interest;
+        return ! is_null($this->parentCategoryId);
     }
+
+    /**
+     * @return int
+     */
+    public function getParentCategoryId(): int
+    {
+        if (is_null($this->parentCategoryId)) {
+            throw new LogicException('Parent category Id is not set');
+        }
+
+        return $this->parentCategoryId;
+    }
+
 }
