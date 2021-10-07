@@ -9,18 +9,39 @@ use Ramsey\Uuid\UuidInterface;
 
 final class Bill
 {
+    /**
+     * @var int|null
+     */
     private ?int $id;
 
+    /**
+     * @var UuidInterface
+     */
     private UuidInterface $uuid;
 
+    /**
+     * @var int|null
+     */
     private ?int $userId;
 
+    /**
+     * @var DateTimeInterface
+     */
     private DateTimeInterface $startDate;
 
+    /**
+     * @var int
+     */
     private int $frequency;
 
+    /**
+     * @var string
+     */
     private string $label;
 
+    /**
+     * @var Money
+     */
     private Money $amount;
 
     /**
@@ -50,6 +71,9 @@ final class Bill
         $this->amount    = $amount;
     }
 
+    /**
+     * @return bool
+     */
     public function hasId(): bool
     {
         return ! is_null($this->id);
@@ -75,6 +99,9 @@ final class Bill
         return $this->uuid;
     }
 
+    /**
+     * @return bool
+     */
     public function hasUserId(): bool
     {
         return ! is_null($this->userId);
