@@ -96,8 +96,8 @@ final class User
     /**
      * @param  int|null  $id
      * @param  UuidInterface  $uuid
-     * @param  string  $firstName
-     * @param  string  $lastName
+     * @param  string|null  $firstName
+     * @param  string|null  $lastName
      * @param  string  $email
      * @param  bool  $isAdmin
      * @param  string|null  $address
@@ -115,8 +115,8 @@ final class User
     public function __construct(
         ?int $id,
         UuidInterface $uuid,
-        string $firstName,
-        string $lastName,
+        ?string $firstName,
+        ?string $lastName,
         string $email,
         bool $isAdmin,
         ?string $address = null,
@@ -180,11 +180,31 @@ final class User
     }
 
     /**
+     * @return bool
+     */
+    public function hasFirstName(): bool
+    {
+        return ! is_null($this->firstName);
+    }
+
+    /**
      * @return string
      */
     public function getFirstName(): string
     {
+        if (is_null($this->firstName)) {
+            throw new LogicException('First name is not set');
+        }
+
         return $this->firstName;
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasLastName(): bool
+    {
+        return ! is_null($this->lastName);
     }
 
     /**
@@ -192,6 +212,10 @@ final class User
      */
     public function getLastName(): string
     {
+        if (is_null($this->lastName)) {
+            throw new LogicException('Last name is not set');
+        }
+
         return $this->lastName;
     }
 

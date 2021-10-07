@@ -10,27 +10,80 @@ final class UserValidator
     /**
      * @param $data
      *
-     * @return bool
+     * @return array
      * @throws ValidationException
+     * @throws \Illuminate\Validation\ValidationException
      */
-    public static function validate($data): bool
+    public static function validate($data): array
     {
         $validator = Validator::make($data, [
-            'id'     => [
+            'id'        => [
                 'nullable',
                 'int'
             ],
-            'uuid'   => [
+            'uuid'      => [
                 'required',
                 'regex:'.UuidValidator::UUID_REGEX
             ],
-            'f_name' => [
+            'firstName' => [
                 'nullable',
                 'string'
             ],
-            'l_name' => [
+            'lastName'  => [
                 'nullable',
                 'string'
+            ],
+            'email'     => [
+                'required',
+                'string'
+            ],
+            'isAdmin'   => [
+                'boolean',
+                'required'
+            ],
+            'address'   => [
+                'string',
+                'nullable'
+            ],
+            'city'      => [
+                'string',
+                'nullable'
+            ],
+            'country'   => [
+                'string',
+                'nullable'
+            ],
+            'postalZip' => [
+                'string',
+                'nullable'
+            ],
+            'locale' => [
+                'string',
+                'required'
+            ],
+            'phone' => [
+                'string',
+                'nullable'
+            ],
+            'dob' => [
+                'date',
+                'nullable'
+            ],
+            'sex' => [
+                'string',
+                'nullable'
+            ],
+            'settings' => [
+                'json',
+                'required'
+            ],
+            'profileImage' => [
+                'string',
+                'nullable'
+            ],
+            'active' => [
+                'boolean',
+                'required'
             ]
         ]);
 
@@ -38,6 +91,6 @@ final class UserValidator
             throw new ValidationException(print_r($validator->getMessageBag()->all(), true));
         }
 
-        return true;
+        return $validator->validated();
     }
 }
