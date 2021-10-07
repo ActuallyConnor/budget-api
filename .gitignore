@@ -16,3 +16,6 @@ yarn-error.log
 
 sdk/composer.lock
 sdk/vendor
+
+.phpstorm.meta.php
+_ide_helper.php
