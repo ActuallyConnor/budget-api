@@ -22,7 +22,7 @@ final class UserValidator
                 'integer'
             ],
             'uuid'      => [
-                'required',
+                'nullable',
                 'regex:'.UuidValidator::UUID_REGEX
             ],
             'firstName' => [

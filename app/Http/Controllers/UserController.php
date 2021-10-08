@@ -2,59 +2,47 @@
 
 namespace App\Http\Controllers;
 
+use App\Exceptions\ValidationException;
+use App\Http\Validators\UserValidator;
+use App\Models\UserModel;
+use Budget\Serializer\User\UserSerializer;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class UserController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param  Request  $request
+     *
+     * @return Response
      */
-    public function store(Request $request)
+    public function store(Request $request): Response
     {
-        //
+        try {
+            $data = UserValidator::validate($request->all());
+        } catch (ValidationException $e) {
+            return response($e->getMessage(), 400);
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            return response($e->getMessage(), 500);
+        }
+
+        $user = UserSerializer::deserialize($data);
+
+        UserModel::write($user);
+
+        return response(UserSerializer::serialize($user), 201);
     }
 
     /**
      * Display the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
-    public function edit($id)
+    public function show(int $id): Response
     {
         //
     }
@@ -62,11 +50,12 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  Request  $request
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     *
+     * @return Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $id): Response
     {
         //
     }
@@ -75,9 +64,10 @@ class UserController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     *
+     * @return Response
      */
-    public function destroy($id)
+    public function destroy(int $id): Response
     {
         //
     }
