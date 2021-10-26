@@ -50,7 +50,11 @@ class UserController extends Controller
      */
     public function show(int $id): Response
     {
-        //
+        $user = UserMapper::mapUserRow(
+            UserModel::whereId($id)->first()->toArray()
+        );
+
+        return response(UserSerializer::serialize($user), 200);
     }
 
     /**
