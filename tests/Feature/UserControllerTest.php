@@ -23,6 +23,9 @@ class UserControllerTest extends TestCase
         $user         = UserMapper::mapUserRow(UserModel::whereId($data[ 'id' ])->first()->toArray());
 
         $this->assertEquals($user->getId(), $responseUser->getId());
+
+        // clean up
+        $this->deleteCreatedUser($user->getId());
     }
 
     /**
@@ -44,6 +47,9 @@ class UserControllerTest extends TestCase
         $responseUser = UserSerializer::deserialize($data);
 
         $this->assertEquals($createdUser->getId(), $responseUser->getId());
+
+        // cleanup
+        $this->deleteCreatedUser($createdUser->getId());
     }
 
     /**
@@ -67,6 +73,9 @@ class UserControllerTest extends TestCase
         $updatedUser  = UserMapper::mapUserRow(UserModel::whereId($data[ 'id' ])->first()->toArray());
 
         $this->assertEquals($updatedUser->getId(), $responseUser->getId());
+
+        // clean up
+        $this->deleteCreatedUser($updatedUser->getId());
     }
 
     /**
@@ -87,6 +96,9 @@ class UserControllerTest extends TestCase
         $this->assertNull(UserModel::whereId($createdUser->getId())->first());
     }
 
+    /**
+     * @return array
+     */
     private function getUserData(): array
     {
         return [
@@ -106,5 +118,13 @@ class UserControllerTest extends TestCase
             'profileImage' => 'https://example.com/profile.jpg',
             'active'       => true
         ];
+    }
+
+    /**
+     * @param  int  $id
+     */
+    private function deleteCreatedUser(int $id): void
+    {
+        UserModel::whereId($id)->first()->delete();
     }
 }
