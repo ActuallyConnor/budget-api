@@ -111,10 +111,13 @@ class UserModel extends Authenticatable
 
     /**
      * @param  User  $user
+     * @param  UserModel|null  $userModel
      */
-    public static function write(User $user): void
+    public static function write(User $user, ?UserModel $userModel = null): void
     {
-        $userModel = new UserModel();
+        if (is_null($userModel)) {
+            $userModel = new UserModel();
+        }
 
         $userModel->uuid = $user->getUuid()->getBytes();
         $userModel->f_name = $user->hasFirstName() ? $user->getFirstName() : null;

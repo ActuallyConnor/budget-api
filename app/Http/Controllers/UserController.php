@@ -67,7 +67,26 @@ class UserController extends Controller
      */
     public function update(Request $request, $id): Response
     {
-        //
+        try {
+            $data = UserValidator::validate($request->all());
+        } catch (ValidationException $e) {
+            return response($e->getMessage(), 400);
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            return response($e->getMessage(), 500);
+        }
+
+        $user = UserSerializer::deserialize($data);
+
+        $userModel = UserModel::whereId($id)->first();
+
+        UserModel::write($user, $userModel);
+
+        $createdUser = UserMapper::mapUserRow(
+            UserModel::whereUuid($user->getUuid()->getBytes())
+                     ->first()->toArray()
+        );
+
+        return response(UserSerializer::serialize($createdUser), 200);
     }
 
     /**

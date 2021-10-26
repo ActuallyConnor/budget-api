@@ -46,6 +46,29 @@ class UserControllerTest extends TestCase
         $this->assertEquals($createdUser->getId(), $responseUser->getId());
     }
 
+    /**
+     * @test
+     */
+    public function itUpdatesUser(): void
+    {
+        $user = UserSerializer::deserialize($this->getUserData());
+        UserModel::write($user);
+        $createdUser = UserMapper::mapUserRow(
+            UserModel::whereUuid($user->getUuid()->getBytes())
+                     ->first()->toArray()
+        );
+
+        $response = $this->put(sprintf('/api/user/%d', $createdUser->getId()), $this->getUserData());
+
+        $response->assertStatus(200);
+
+        $data         = json_decode($response->getContent(), true);
+        $responseUser = UserSerializer::deserialize($data);
+        $updatedUser  = UserMapper::mapUserRow(UserModel::whereId($data[ 'id' ])->first()->toArray());
+
+        $this->assertEquals($updatedUser->getId(), $responseUser->getId());
+    }
+
     private function getUserData(): array
     {
         return [
