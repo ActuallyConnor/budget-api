@@ -49,7 +49,7 @@ class UserControllerTest extends TestCase
     /**
      * @test
      */
-    public function itUpdatesUser(): void
+    public function itUpdatesUserById(): void
     {
         $user = UserSerializer::deserialize($this->getUserData());
         UserModel::write($user);
@@ -67,6 +67,24 @@ class UserControllerTest extends TestCase
         $updatedUser  = UserMapper::mapUserRow(UserModel::whereId($data[ 'id' ])->first()->toArray());
 
         $this->assertEquals($updatedUser->getId(), $responseUser->getId());
+    }
+
+    /**
+     * @test
+     */
+    public function itDeletesUserById(): void
+    {
+        $user = UserSerializer::deserialize($this->getUserData());
+        UserModel::write($user);
+        $createdUser = UserMapper::mapUserRow(
+            UserModel::whereUuid($user->getUuid()->getBytes())
+                     ->first()->toArray()
+        );
+
+        $response = $this->delete(sprintf('/api/user/%d', $createdUser->getId()));
+
+        $response->assertStatus(200);
+        $this->assertNull(UserModel::whereId($createdUser->getId())->first());
     }
 
     private function getUserData(): array

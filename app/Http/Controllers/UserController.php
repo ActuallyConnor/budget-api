@@ -98,6 +98,9 @@ class UserController extends Controller
      */
     public function destroy(int $id): Response
     {
-        //
+        $user = UserModel::whereId($id)->first();
+        $user->delete();
+
+        return response(sprintf('User "%d" deleted', $user->id));
     }
 }
