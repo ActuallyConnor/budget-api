@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\User;
 
+use Budget\Serializer\Serializer;
 use Budget\Users\User\User;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -73,6 +73,13 @@ class UserModel extends Authenticatable
     use HasApiTokens, HasFactory, Notifiable;
 
     /**
+     * The table associated with the model.
+     *
+     * @var string
+     */
+    protected $table = 'users';
+
+    /**
      * The attributes that are mass assignable.
      *
      * @var string[]
@@ -105,11 +112,27 @@ class UserModel extends Authenticatable
     /**
      * @param  User  $user
      */
-    public static function write(User $user)
+    public static function write(User $user): void
     {
-        UserModel::create([
-            'uuid' => $user->getUuid()->getBytes(),
-            ''
-        ]);
+        $userModel = new UserModel();
+
+        $userModel->uuid = $user->getUuid()->getBytes();
+        $userModel->f_name = $user->hasFirstName() ? $user->getFirstName() : null;
+        $userModel->l_name = $user->hasLastName() ? $user->getLastName() : null;
+        $userModel->email = $user->getEmail();
+        $userModel->is_admin = $user->isAdmin();
+        $userModel->address = $user->hasAddress() ? $user->getAddress() : null;
+        $userModel->city = $user->hasCity() ? $user->getCity() : null;
+        $userModel->country = $user->hasCountry() ? $user->getCountry() : null;
+        $userModel->postal_zip = $user->hasPostalZip() ? $user->getPostalZip() : null;
+        $userModel->locale = $user->getLocale();
+        $userModel->phone = $user->hasPhone() ? $user->getPhone() : null;
+        $userModel->dob = $user->hasDob() ? $user->getDob() : null;
+        $userModel->sex = $user->hasSexCode() ? Serializer::getSexFromCode($user->getSexCode()) : null;
+        $userModel->settings = json_encode($user->getSettings());
+        $userModel->profile_image = $user->hasProfileImage() ? $user->getProfileImage() : null;
+        $userModel->active = $user->isActive();
+
+        $userModel->save();
     }
 }

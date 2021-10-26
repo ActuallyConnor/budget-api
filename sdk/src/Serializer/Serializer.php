@@ -10,7 +10,9 @@ use Throwable;
 
 class Serializer
 {
-    protected const DATE_FORMAT = DateTimeInterface::RFC3339;
+    public const DATE_FORMAT = DateTimeInterface::RFC3339;
+
+    public const DB_DATE_FORMAT = 'Y-m-d';
 
     /**
      * @param  string|null  $input
@@ -39,7 +41,9 @@ class Serializer
     private static function parseDate(?string $input, bool $throwOnInvalid, string $format): ?DateTimeInterface
     {
         try {
-            $date = ! empty($input) ? DateTimeImmutable::createFromFormat($format, $input) : false;
+            $date = ! empty($input)
+                ? DateTimeImmutable::createFromFormat($format, $input, new \DateTimeZone('UTC'))
+                : false;
         } catch (Throwable $e) {
             if ($throwOnInvalid) {
                 throw new InvalidArgumentException(sprintf('Could not parse date "%s"', $input), $e->getCode(), $e);
@@ -49,7 +53,7 @@ class Serializer
         }
 
         if ( ! $date && $throwOnInvalid) {
-            throw new InvalidArgumentException('Could not parse date "%s"', $input);
+            throw new InvalidArgumentException(sprintf('Could not parse date "%s"', $input));
         }
 
         return $date !== false ? $date : null;

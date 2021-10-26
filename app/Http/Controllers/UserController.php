@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Exceptions\ValidationException;
 use App\Http\Validators\UserValidator;
-use App\Models\UserModel;
+use App\Models\User\UserMapper;
+use App\Models\User\UserModel;
 use Budget\Serializer\User\UserSerializer;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -32,7 +33,12 @@ class UserController extends Controller
 
         UserModel::write($user);
 
-        return response(UserSerializer::serialize($user), 201);
+        $createdUser = UserMapper::mapUserRow(
+            UserModel::whereUuid($user->getUuid()->getBytes())
+                     ->first()->toArray()
+        );
+
+        return response(UserSerializer::serialize($createdUser), 201);
     }
 
     /**
