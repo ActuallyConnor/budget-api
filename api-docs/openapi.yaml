@@ -10,21 +10,31 @@ servers:
   - url: https://budget.connorsmyth.com
 paths:
   /api/user:
-    description: Users
-    summary: Users
-    get:
-      operationId: getUsers
-      summary: Users
+    description: Create a user
+    summary: Creates a single user
+    post:
+      operationId: postUser
+      summary: Create a user
+      description: Create single user
       tags:
         - user
       responses:
         '200':
-          description: users
+          description: Returns the created user
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  user:
-                    type: string
-components: {}
+                $ref: '#/components/schemas/User'
+components:
+  schemas:
+    Uuid:
+      type: string
+      example: b9f89472-85bc-4b3b-826a-18d2dd73549f
+      pattern: '[a-f0-9]{8}-?[a-f0-9]{4}-?4[a-f0-9]{3}-?[89ab][a-f0-9]{3}-?[a-f0-9]{12}'
+    User:
+      type: object
+      required:
+        - uuid
+      properties:
+        uuid:
+          $ref: '#/components/schemas/Uuid'

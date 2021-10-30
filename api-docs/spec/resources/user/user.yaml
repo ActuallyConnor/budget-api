@@ -1,0 +1,15 @@
+description: Create a user
+summary: Creates a single user
+
+post:
+  operationId: postUser
+  summary: Create a user
+  description: Create single user
+  tags: [ user ]
+  responses:
+    200:
+      description: Returns the created user
+      content:
+        application/json:
+          schema:
+            $ref: ../../schemas/budget/user/User.yaml

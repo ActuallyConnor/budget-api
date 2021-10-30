@@ -1,0 +1,3 @@
+type: string
+example: b9f89472-85bc-4b3b-826a-18d2dd73549f
+pattern: '[a-f0-9]{8}-?[a-f0-9]{4}-?4[a-f0-9]{3}-?[89ab][a-f0-9]{3}-?[a-f0-9]{12}'
