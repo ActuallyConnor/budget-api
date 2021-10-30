@@ -1,0 +1,30 @@
+openapi: 3.0.3
+info:
+  title: Budget API
+  description: Budget API
+  version: 0.0.1
+  license:
+    name: Unlicensed
+    url: https://connorsmyth.com
+servers:
+  - url: https://budget.connorsmyth.com
+paths:
+  /api/user:
+    description: Users
+    summary: Users
+    get:
+      operationId: getUsers
+      summary: Users
+      tags:
+        - user
+      responses:
+        '200':
+          description: users
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  user:
+                    type: string
+components: {}

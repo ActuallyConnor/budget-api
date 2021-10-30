@@ -7,12 +7,20 @@
         "watch-poll": "mix watch -- --watch-options-poll=1000",
         "hot": "mix watch --hot",
         "prod": "npm run production",
-        "production": "mix --production"
+        "production": "mix --production",
+        "lint-docs": "openapi lint api-docs/spec/api.yaml",
+        "compile-docs": "openapi bundle api-docs/spec/api.yaml -o api-docs/openapi.yaml",
+        "html-docs": "redoc-cli bundle api-docs/openapi.yaml --options.disableSearch=true --options.hideHostname=true ==options.hideSchemaTitles=true --options.noAutoAuth=true",
+        "move-docs": "mv redoc-static.html public/docs/index.html",
+        "build-docs": "npm run lint-docs && npm run compile-docs && npm run html-docs && npm run move-docs"
     },
     "devDependencies": {
         "axios": "^0.21",
         "laravel-mix": "^6.0.6",
         "lodash": "^4.17.19",
-        "postcss": "^8.1.14"
+        "postcss": "^8.1.14",
+        "redoc-cli": "^0.13.0",
+        "widdershins": "^4.0.1",
+        "@redocly/openapi-cli": "latest"
     }
 }
