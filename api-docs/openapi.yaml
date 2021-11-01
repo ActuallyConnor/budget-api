@@ -35,6 +35,61 @@ components:
       type: object
       required:
         - uuid
+        - email
+        - isAdmin
+        - locale
+        - settings
+        - active
       properties:
+        id:
+          type: integer
+          example: 12345
         uuid:
           $ref: '#/components/schemas/Uuid'
+        firstName:
+          type: string
+          example: John
+        lastName:
+          type: string
+          example: Smith
+        email:
+          type: string
+          example: john.smith@example.com
+        isAdmin:
+          type: boolean
+          example: true
+        address:
+          type: string
+          example: 1 Test St.
+        city:
+          type: string
+          example: Toronto
+        country:
+          type: string
+          example: CA
+        postalZip:
+          type: string
+          example: A1A 1A1
+        locale:
+          type: string
+          example: en_CA
+        phone:
+          type: string
+          example: +1 416-555-5555
+        dob:
+          type: string
+          example: 1993-01-01T00:00:00Z
+          description: RFC3339 date
+        sex:
+          type: string
+          example: M
+        settings:
+          type: string
+          example: '{}'
+          description: JSON string of settings
+        profileImage:
+          type: string
+          example: https://example.com/profile-image.jpg
+        active:
+          type: boolean
+          example: true
