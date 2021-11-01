@@ -17,71 +17,75 @@ final class UserValidator
     public static function validate($data): array
     {
         $validator = Validator::make($data, [
-            'id'        => [
+            'id'            => [
                 'nullable',
                 'integer'
             ],
-            'uuid'      => [
+            'uuid'          => [
                 'nullable',
                 'regex:'.UuidValidator::UUID_REGEX
             ],
-            'firstName' => [
+            'firstName'     => [
                 'nullable',
                 'string'
             ],
-            'lastName'  => [
+            'lastName'      => [
                 'nullable',
                 'string'
             ],
-            'email'     => [
+            'email'         => [
                 'required',
                 'string'
             ],
-            'isAdmin'   => [
+            'isAdmin'       => [
                 'boolean',
                 'required'
             ],
-            'address'   => [
+            'address'       => [
                 'string',
                 'nullable'
             ],
-            'city'      => [
+            'city'          => [
                 'string',
                 'nullable'
             ],
-            'country'   => [
+            'provinceState' => [
                 'string',
                 'nullable'
             ],
-            'postalZip' => [
+            'country'       => [
                 'string',
                 'nullable'
             ],
-            'locale' => [
+            'postalZip'     => [
+                'string',
+                'nullable'
+            ],
+            'locale'        => [
                 'string',
                 'required'
             ],
-            'phone' => [
+            'phone'         => [
                 'string',
                 'nullable'
             ],
-            'dob' => [
+            'dob'           => [
                 'date',
                 'nullable'
             ],
-            'sex' => [
+            'sex'           => [
                 'string',
                 'nullable'
             ],
-            'settings' => [
+            'settings'      => [
                 'json',
                 'required'
             ],
-            'profileImage' => [
+            'profileImage'  => [
                 'string',
                 'nullable'
             ],
-            'active' => [
+            'active'        => [
                 'boolean',
                 'required'
             ]

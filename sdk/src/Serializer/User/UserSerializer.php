@@ -24,6 +24,7 @@ class UserSerializer
             $data[ 'isAdmin' ],
             $data[ 'address' ] ?? null,
             $data[ 'city' ] ?? null,
+            $data[ 'provinceState' ] ?? null,
             $data[ 'country' ] ?? null,
             $data[ 'postalZip' ] ?? null,
             $data[ 'locale' ],
@@ -44,23 +45,24 @@ class UserSerializer
     public static function serialize(User $user): array
     {
         return [
-            'id'           => $user->hasId() ? $user->getId() : null,
-            'uuid'         => $user->getUuid()->toString(),
-            'firstName'    => $user->hasFirstName() ? $user->getFirstName() : null,
-            'lastName'     => $user->hasLastName() ? $user->getLastName() : null,
-            'email'        => $user->getEmail(),
-            'isAdmin'      => $user->isAdmin(),
-            'address'      => $user->hasAddress() ? $user->getAddress() : null,
-            'city'         => 'Test Town',
-            'country'      => 'Canada',
-            'postalZip'    => 'A1A1A1',
-            'locale'       => 'en_CA',
-            'phone'        => '+14165555555',
-            'dob'          => '1993-01-01T00:00:00Z',
-            'sex'          => 'M',
-            'settings'     => '{}',
-            'profileImage' => 'https://example.com/profile.jpg',
-            'active'       => true
+            'id'            => $user->hasId() ? $user->getId() : null,
+            'uuid'          => $user->getUuid()->toString(),
+            'firstName'     => $user->hasFirstName() ? $user->getFirstName() : null,
+            'lastName'      => $user->hasLastName() ? $user->getLastName() : null,
+            'email'         => $user->getEmail(),
+            'isAdmin'       => $user->isAdmin(),
+            'address'       => $user->hasAddress() ? $user->getAddress() : null,
+            'city'          => 'Test Town',
+            'provinceState' => 'ON',
+            'country'       => 'Canada',
+            'postalZip'     => 'A1A1A1',
+            'locale'        => 'en_CA',
+            'phone'         => '+14165555555',
+            'dob'           => '1993-01-01T00:00:00Z',
+            'sex'           => 'M',
+            'settings'      => '{}',
+            'profileImage'  => 'https://example.com/profile.jpg',
+            'active'        => true
         ];
     }
 }

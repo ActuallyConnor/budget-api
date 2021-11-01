@@ -102,21 +102,22 @@ class UserControllerTest extends TestCase
     private function getUserData(): array
     {
         return [
-            'firstName'    => 'Test',
-            'lastName'     => 'Tester',
-            'email'        => 'test@example.com',
-            'isAdmin'      => true,
-            'address'      => '123 Test St.',
-            'city'         => 'Test Town',
-            'country'      => 'Canada',
-            'postalZip'    => 'A1A1A1',
-            'locale'       => 'en_CA',
-            'phone'        => '+14165555555',
-            'dob'          => '1993-01-01T00:00:00Z',
-            'sex'          => 'M',
-            'settings'     => '{}',
-            'profileImage' => 'https://example.com/profile.jpg',
-            'active'       => true
+            'firstName'     => 'Test',
+            'lastName'      => 'Tester',
+            'email'         => 'test@example.com',
+            'isAdmin'       => true,
+            'address'       => '123 Test St.',
+            'city'          => 'Test Town',
+            'provinceState' => 'ON',
+            'country'       => 'CA',
+            'postalZip'     => 'A1A 1A1',
+            'locale'        => 'en_CA',
+            'phone'         => '+1 416-555-5555',
+            'dob'           => '1993-01-01T00:00:00Z',
+            'sex'           => 'M',
+            'settings'      => '{}',
+            'profileImage'  => 'https://example.com/profile.jpg',
+            'active'        => true
         ];
     }
 
