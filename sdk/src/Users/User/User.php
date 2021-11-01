@@ -51,6 +51,11 @@ final class User
     /**
      * @var string|null
      */
+    private ?string $provinceState;
+
+    /**
+     * @var string|null
+     */
     private ?string $country;
 
     /**
@@ -102,6 +107,7 @@ final class User
      * @param  bool  $isAdmin
      * @param  string|null  $address
      * @param  string|null  $city
+     * @param  string|null  $provinceState
      * @param  string|null  $country
      * @param  string|null  $postalZip
      * @param  string  $locale
@@ -121,6 +127,7 @@ final class User
         bool $isAdmin,
         ?string $address = null,
         ?string $city = null,
+        ?string $provinceState = null,
         ?string $country = null,
         ?string $postalZip = null,
         string $locale = 'en_CA',
@@ -132,23 +139,24 @@ final class User
         bool $active = true
     ) {
 
-        $this->id           = $id;
-        $this->uuid         = $uuid;
-        $this->firstName    = $firstName;
-        $this->lastName     = $lastName;
-        $this->email        = $email;
-        $this->isAdmin      = $isAdmin;
-        $this->address      = $address;
-        $this->city         = $city;
-        $this->country      = $country;
-        $this->postalZip    = $postalZip;
-        $this->locale       = $locale;
-        $this->phone        = $phone;
-        $this->dob          = $dob;
-        $this->sexCode      = $sexCode;
-        $this->settings     = $settings;
-        $this->profileImage = $profileImage;
-        $this->active       = $active;
+        $this->id            = $id;
+        $this->uuid          = $uuid;
+        $this->firstName     = $firstName;
+        $this->lastName      = $lastName;
+        $this->email         = $email;
+        $this->isAdmin       = $isAdmin;
+        $this->address       = $address;
+        $this->city          = $city;
+        $this->provinceState = $provinceState;
+        $this->country       = $country;
+        $this->postalZip     = $postalZip;
+        $this->locale        = $locale;
+        $this->phone         = $phone;
+        $this->dob           = $dob;
+        $this->sexCode       = $sexCode;
+        $this->settings      = $settings;
+        $this->profileImage  = $profileImage;
+        $this->active        = $active;
     }
 
     /**
@@ -273,6 +281,26 @@ final class User
         }
 
         return $this->city;
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasProvinceState(): bool
+    {
+        return ! is_null($this->provinceState);
+    }
+
+    /**
+     * @return string
+     */
+    public function getProvinceState(): string
+    {
+        if (is_null($this->provinceState)) {
+            throw new LogicException('Province/state is not set');
+        }
+
+        return $this->provinceState;
     }
 
     /**

@@ -135,6 +135,9 @@ components:
         city:
           type: string
           example: Toronto
+        provinceState:
+          type: string
+          example: 'ON'
         country:
           type: string
           example: CA

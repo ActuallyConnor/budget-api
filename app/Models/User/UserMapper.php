@@ -24,6 +24,7 @@ final class UserMapper
             $row[ 'is_admin' ],
             $row[ 'address' ] ?? null,
             $row[ 'city' ] ?? null,
+            $row[ 'provinceState' ] ?? null,
             $row[ 'postalZip' ] ?? null,
             $row[ 'country' ] ?? null,
             $row[ 'locale' ],
