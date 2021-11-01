@@ -8,4 +8,4 @@ A simple budgeting API
 
 ## Documentation
 
-[http://budget.connorsmyth.com/docs/](http://budget.connorsmyth.com/docs/)
+[https://budget.connorsmyth.com/docs/](https://budget.connorsmyth.com/docs/)
