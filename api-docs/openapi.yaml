@@ -9,15 +9,38 @@ info:
 servers:
   - url: https://budget.connorsmyth.com
 paths:
-  /api/user:
-    description: Create a user
-    summary: Creates a single user
+  /api/user/{id}:
+    description: Create, update, or retrieve a user
+    summary: Creates, updates, or retrieves a single user
+    get:
+      operationId: getUserById
+      summary: Get a user by its ID
+      description: Get a single user
+      tags:
+        - user
+      parameters:
+        - $ref: '#/components/parameters/Identifier'
+      responses:
+        '200':
+          description: Returns the requested user
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
     post:
       operationId: postUser
       summary: Create a user
       description: Create single user
       tags:
         - user
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+              discriminator:
+                propertyName: type
       responses:
         '200':
           description: Returns the created user
@@ -25,7 +48,55 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/User'
+    put:
+      operationId: putUser
+      summary: Update a user
+      description: Update single user
+      tags:
+        - user
+      parameters:
+        - $ref: '#/components/parameters/Identifier'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+              discriminator:
+                propertyName: type
+      responses:
+        '200':
+          description: Returns the created user
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+    delete:
+      operationId: deleteUser
+      summary: Delete a user
+      description: Delete single user
+      tags:
+        - user
+      parameters:
+        - $ref: '#/components/parameters/Identifier'
+      responses:
+        '200':
+          description: Confirms user with ID is deleted
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: User "12345" deleted
 components:
+  parameters:
+    Identifier:
+      in: path
+      name: id
+      required: false
+      description: The ID of the resource
+      schema:
+        type: integer
+        example: 12345
   schemas:
     Uuid:
       type: string

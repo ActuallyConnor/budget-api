@@ -9,8 +9,6 @@ info:
 servers:
   - url: 'https://budget.connorsmyth.com'
 paths:
-  /api/user:
-    $ref: ./resources/user/user.yaml
 
-#  /api/user/{userId}:
-#    $ref: ./resources/user/user-by-id.yaml
+  /api/user/{id}:
+    $ref: ./resources/user/user.yaml

@@ -1,11 +1,34 @@
-description: Create a user
-summary: Creates a single user
+description: Create, update, or retrieve a user
+summary: Creates, updates, or retrieves a single user
+
+get:
+  operationId: getUserById
+  summary: Get a user by its ID
+  description: Get a single user
+  tags: [ user ]
+  parameters:
+    - $ref: ../../parameters/Identifier.yaml
+  responses:
+    200:
+      description: Returns the requested user
+      content:
+        application/json:
+          schema:
+            $ref: ../../schemas/budget/user/User.yaml
 
 post:
   operationId: postUser
   summary: Create a user
   description: Create single user
   tags: [ user ]
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: ../../schemas/budget/user/User.yaml
+          discriminator:
+            propertyName: type
   responses:
     200:
       description: Returns the created user
@@ -13,3 +36,43 @@ post:
         application/json:
           schema:
             $ref: ../../schemas/budget/user/User.yaml
+
+put:
+  operationId: putUser
+  summary: Update a user
+  description: Update single user
+  tags: [ user ]
+  parameters:
+    - $ref: ../../parameters/Identifier.yaml
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: ../../schemas/budget/user/User.yaml
+          discriminator:
+            propertyName: type
+  responses:
+    200:
+      description: Returns the created user
+      content:
+        application/json:
+          schema:
+            $ref: ../../schemas/budget/user/User.yaml
+
+delete:
+  operationId: deleteUser
+  summary: Delete a user
+  description: Delete single user
+  tags: [ user ]
+  parameters:
+    - $ref: ../../parameters/Identifier.yaml
+  responses:
+    200:
+      description: Confirms user with ID is deleted
+      content:
+        text/plain:
+          schema:
+            type: string
+            example: 'User "12345" deleted'
+
