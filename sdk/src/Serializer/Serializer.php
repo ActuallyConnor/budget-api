@@ -6,13 +6,18 @@ use DateTimeImmutable;
 use DateTimeInterface;
 use InvalidArgumentException;
 use LogicException;
+use Money\Currencies\ISOCurrencies;
+use Money\Formatter\DecimalMoneyFormatter;
+use Money\Money;
 use Throwable;
 
 class Serializer
 {
     public const DATE_FORMAT = DateTimeInterface::RFC3339;
 
-    public const DB_DATE_FORMAT = 'Y-m-d';
+    public const DOB_DATE_FORMAT = 'Y-m-d';
+
+    public const DATE_TIME_FORMAT = 'Y-m-d H:i:s';
 
     /**
      * @param  string|null  $input
@@ -113,5 +118,18 @@ class Serializer
         }
 
         return null;
+    }
+
+    /**
+     * @param  Money  $money
+     *
+     * @return float
+     */
+    public static function getFloatFromMoney(Money $money): float
+    {
+        $currencies     = new ISOCurrencies();
+        $moneyFormatter = new DecimalMoneyFormatter($currencies);
+
+        return $moneyFormatter->format($money);
     }
 }

@@ -130,7 +130,7 @@ class UserModel extends Authenticatable
         $userModel->postal_zip = $user->hasPostalZip() ? $user->getPostalZip() : null;
         $userModel->locale = $user->getLocale();
         $userModel->phone = $user->hasPhone() ? $user->getPhone() : null;
-        $userModel->dob = $user->hasDob() ? $user->getDob() : null;
+        $userModel->dob = $user->hasDob() ? Serializer::serializeDate($user->getDob()) : null;
         $userModel->sex = $user->hasSexCode() ? Serializer::getSexFromCode($user->getSexCode()) : null;
         $userModel->settings = json_encode($user->getSettings());
         $userModel->profile_image = $user->hasProfileImage() ? $user->getProfileImage() : null;

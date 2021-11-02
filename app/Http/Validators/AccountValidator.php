@@ -22,7 +22,7 @@ final class AccountValidator
                 'integer'
             ],
             'uuid'       => [
-                'required',
+                'nullable',
                 'regex:'.UuidValidator::UUID_REGEX
             ],
             'userId'     => [
@@ -48,6 +48,7 @@ final class AccountValidator
         ]);
 
         if ($validator->fails()) {
+            dd($validator->getMessageBag());
             throw new ValidationException(print_r($validator->getMessageBag()->all(), true));
         }
 

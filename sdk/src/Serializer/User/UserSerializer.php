@@ -58,7 +58,7 @@ class UserSerializer
             'postalZip'     => $user->hasPostalZip() ? $user->getPostalZip() : null,
             'locale'        => $user->getLocale(),
             'phone'         => $user->hasPhone() ? $user->getPhone() : null,
-            'dob'           => Serializer::serializeDate($user->getDob()),
+            'dob'           => $user->hasDob() ? Serializer::serializeDate($user->getDob()) : null,
             'sex'           => $user->hasSexCode() ? Serializer::getSexFromCode($user->getSexCode()) : null,
             'settings'      => json_encode($user->getSettings()),
             'profileImage'  => $user->hasProfileImage() ? $user->getProfileImage() : null,
