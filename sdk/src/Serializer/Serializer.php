@@ -6,6 +6,9 @@ use DateTimeImmutable;
 use DateTimeInterface;
 use InvalidArgumentException;
 use LogicException;
+use Money\Currencies\ISOCurrencies;
+use Money\Formatter\DecimalMoneyFormatter;
+use Money\Money;
 use Throwable;
 
 class Serializer
@@ -113,5 +116,18 @@ class Serializer
         }
 
         return null;
+    }
+
+    /**
+     * @param  Money  $money
+     *
+     * @return float
+     */
+    public static function getFloatFromMoney(Money $money): float
+    {
+        $currencies     = new ISOCurrencies();
+        $moneyFormatter = new DecimalMoneyFormatter($currencies);
+
+        return $moneyFormatter->format($money);
     }
 }

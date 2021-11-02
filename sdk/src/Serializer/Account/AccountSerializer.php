@@ -36,7 +36,13 @@ class AccountSerializer
     public static function serialize(Account $account): array
     {
         return [
-
+            'id'         => $account->getId(),
+            'uuid'       => $account->getUuid()->getBytes(),
+            'userId'     => $account->getUserId(),
+            'dateOpened' => Serializer::serializeDate($account->getDateOpened()),
+            'name'       => $account->getName(),
+            'balance'    => Serializer::getFloatFromMoney($account->getBalance()),
+            'interest'   => Serializer::getFloatFromMoney($account->getInterest())
         ];
     }
 }
