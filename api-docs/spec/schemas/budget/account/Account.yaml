@@ -1,0 +1,27 @@
+type: object
+required:
+  - dateOpened
+  - name
+  - balance
+  - interest
+
+properties:
+  id:
+    type: integer
+    example: 12345
+  uuid:
+    $ref: ../../Uuid.yaml
+  userId:
+    type: integer
+    example: 12345
+  name:
+    type: string
+    example: 1993-01-01T00:00:00Z
+  balance:
+    type: integer
+    description: Number of cents
+    example: 1000
+  interest:
+    type: number
+    description: Percentage of interest
+    example: 0.5
