@@ -48,9 +48,13 @@ class AccountController extends Controller
      *
      * @return Response
      */
-    public function show($id): Response
+    public function show(int $id): Response
     {
-        //
+        $account = AccountMapper::mapAccountRow(
+            AccountModel::whereId($id)->first()->toArray()
+        );
+
+        return response(AccountSerializer::serialize($account), 200);
     }
 
     /**
@@ -61,9 +65,28 @@ class AccountController extends Controller
      *
      * @return Response
      */
-    public function update(Request $request, int $id): Response
+    public function update(Request $request, $id): Response
     {
-        //
+        try {
+            $data = AccountValidator::validate($request->all());
+        } catch (ValidationException $e) {
+            return response($e->getMessage(), 400);
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            return response($e->getMessage(), 500);
+        }
+
+        $account = AccountSerializer::deserialize($data);
+
+        $accountModel = AccountModel::whereId($id)->first();
+
+        AccountModel::write($account, $accountModel);
+
+        $createdAccount = AccountMapper::mapAccountRow(
+            AccountModel::whereUuid($account->getUuid()->getBytes())
+                        ->first()->toArray()
+        );
+
+        return response(AccountSerializer::serialize($createdAccount), 200);
     }
 
     /**
@@ -75,6 +98,9 @@ class AccountController extends Controller
      */
     public function destroy(int $id): Response
     {
-        //
+        $account = AccountModel::whereId($id)->first();
+        $account->delete();
+
+        return response(sprintf('Account "%d" deleted', $account->id));
     }
 }
