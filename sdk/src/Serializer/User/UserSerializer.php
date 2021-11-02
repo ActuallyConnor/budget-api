@@ -52,17 +52,17 @@ class UserSerializer
             'email'         => $user->getEmail(),
             'isAdmin'       => $user->isAdmin(),
             'address'       => $user->hasAddress() ? $user->getAddress() : null,
-            'city'          => 'Test Town',
-            'provinceState' => 'ON',
-            'country'       => 'Canada',
-            'postalZip'     => 'A1A1A1',
-            'locale'        => 'en_CA',
-            'phone'         => '+14165555555',
-            'dob'           => '1993-01-01T00:00:00Z',
-            'sex'           => 'M',
-            'settings'      => '{}',
-            'profileImage'  => 'https://example.com/profile.jpg',
-            'active'        => true
+            'city'          => $user->hasCity() ? $user->getCity() : null,
+            'provinceState' => $user->hasProvinceState() ? $user->getProvinceState() : null,
+            'country'       => $user->hasCountry() ? $user->getCountry() : null,
+            'postalZip'     => $user->hasPostalZip() ? $user->getPostalZip() : null,
+            'locale'        => $user->getLocale(),
+            'phone'         => $user->hasPhone() ? $user->getPhone() : null,
+            'dob'           => Serializer::serializeDate($user->getDob()),
+            'sex'           => $user->hasSexCode() ? Serializer::getSexFromCode($user->getSexCode()) : null,
+            'settings'      => json_encode($user->getSettings()),
+            'profileImage'  => $user->hasProfileImage() ? $user->getProfileImage() : null,
+            'active'        => $user->isActive()
         ];
     }
 }

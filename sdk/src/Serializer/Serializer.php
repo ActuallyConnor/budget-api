@@ -32,6 +32,26 @@ class Serializer
     }
 
     /**
+     * @param  DateTimeInterface|null  $date
+     * @param  string  $format
+     * @param  bool  $throwExceptionOnNull
+     *
+     * @return string|null
+     */
+    public static function serializeDate(?DateTimeInterface $date, string $format = self::DATE_FORMAT, bool $throwExceptionOnNull = true): ?string
+    {
+        if (is_null($date)) {
+            if ($throwExceptionOnNull) {
+                throw new LogicException('No date is set');
+            }
+
+            return null;
+        }
+
+        return $date->format($format);
+    }
+
+    /**
      * @param  string|null  $input
      * @param  bool  $throwOnInvalid
      * @param  string  $format
