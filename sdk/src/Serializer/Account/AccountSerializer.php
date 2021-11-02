@@ -37,7 +37,7 @@ class AccountSerializer
     {
         return [
             'id'         => $account->getId(),
-            'uuid'       => $account->getUuid()->getBytes(),
+            'uuid'       => $account->getUuid()->toString(),
             'userId'     => $account->getUserId(),
             'dateOpened' => Serializer::serializeDate($account->getDateOpened()),
             'name'       => $account->getName(),

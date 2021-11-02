@@ -83,7 +83,7 @@ abstract class TestCase extends BaseTestCase
     {
         $user = $this->createUser();
         return [
-            'user_id'    => $user->getId(),
+            'userId'    => $user->getId(),
             'dateOpened' => '1993-01-01T00:00:00Z',
             'name'       => 'Chequing',
             'balance'    => 10000,
