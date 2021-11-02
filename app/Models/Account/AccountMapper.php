@@ -21,7 +21,7 @@ class AccountMapper
             $row[ 'id' ],
             Uuid::fromBytes($row[ 'uuid' ]),
             $row[ 'user_id' ] ?? null,
-            Serializer::deserializeDate($row[ 'dateOpened' ]),
+            Serializer::deserializeDate($row[ 'date_opened' ], Serializer::DATE_TIME_FORMAT),
             $row[ 'name' ],
             new Money($row[ 'balance' ], new Currency('CAD')),
             new Money($row[ 'interest' ], new Currency('CAD'))

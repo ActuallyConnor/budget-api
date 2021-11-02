@@ -15,7 +15,9 @@ class Serializer
 {
     public const DATE_FORMAT = DateTimeInterface::RFC3339;
 
-    public const DB_DATE_FORMAT = 'Y-m-d';
+    public const DOB_DATE_FORMAT = 'Y-m-d';
+
+    public const DATE_TIME_FORMAT = 'Y-m-d H:i:s';
 
     /**
      * @param  string|null  $input

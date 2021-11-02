@@ -29,7 +29,7 @@ final class UserMapper
             $row[ 'country' ] ?? null,
             $row[ 'locale' ],
             $row[ 'phone' ] ?? null,
-            isset($row[ 'dob' ]) ? Serializer::deserializeDate($row[ 'dob' ], Serializer::DB_DATE_FORMAT) : null,
+            isset($row[ 'dob' ]) ? Serializer::deserializeDate($row[ 'dob' ], Serializer::DOB_DATE_FORMAT) : null,
             isset($row[ 'sex' ]) ? Serializer::getSexCode($row[ 'sex' ]) : null,
             json_decode($row[ 'settings' ], true),
             $row[ 'profileImage' ] ?? null,
