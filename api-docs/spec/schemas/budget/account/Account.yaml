@@ -22,6 +22,6 @@ properties:
     description: Number of cents
     example: 1000
   interest:
-    type: integer
-    description: Number of cents
-    example: 16
+    type: number
+    description: Percentage of interest
+    example: 0.5
