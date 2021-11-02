@@ -12,3 +12,6 @@ paths:
 
   /api/user/{id}:
     $ref: ./resources/user/user.yaml
+
+  /api/account/{id}:
+    $ref: ./resources/account/account.yaml

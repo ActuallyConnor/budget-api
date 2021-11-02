@@ -1,0 +1,78 @@
+description: Create, update, or retrieve a account
+summary: Creates, updates, or retrieves a single account
+
+get:
+  operationId: getAccountById
+  summary: Get a account by its ID
+  description: Get a single account
+  tags: [ account ]
+  parameters:
+    - $ref: ../../parameters/Identifier.yaml
+  responses:
+    200:
+      description: Returns the requested account
+      content:
+        application/json:
+          schema:
+            $ref: ../../schemas/budget/account/Account.yaml
+
+post:
+  operationId: postAccount
+  summary: Create a account
+  description: Create single account
+  tags: [ account ]
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: ../../schemas/budget/account/Account.yaml
+          discriminator:
+            propertyName: type
+  responses:
+    200:
+      description: Returns the created account
+      content:
+        application/json:
+          schema:
+            $ref: ../../schemas/budget/account/Account.yaml
+
+put:
+  operationId: putAccount
+  summary: Update a account
+  description: Update single account
+  tags: [ account ]
+  parameters:
+    - $ref: ../../parameters/Identifier.yaml
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: ../../schemas/budget/account/Account.yaml
+          discriminator:
+            propertyName: type
+  responses:
+    200:
+      description: Returns the created account
+      content:
+        application/json:
+          schema:
+            $ref: ../../schemas/budget/account/Account.yaml
+
+delete:
+  operationId: deleteAccount
+  summary: Delete a account
+  description: Delete single account
+  tags: [ account ]
+  parameters:
+    - $ref: ../../parameters/Identifier.yaml
+  responses:
+    200:
+      description: Confirms account with ID is deleted
+      content:
+        text/plain:
+          schema:
+            type: string
+            example: 'Account "12345" deleted'
+
