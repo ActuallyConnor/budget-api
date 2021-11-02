@@ -2,6 +2,8 @@
 
 namespace App\Models\Account;
 
+use Budget\Accounts\Account\Account;
+use Budget\Serializer\Serializer;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -36,4 +38,17 @@ use Illuminate\Database\Eloquent\Model;
 class AccountModel extends Model
 {
     use HasFactory;
+
+    public static function write(Account $account, ?AccountModel $accountModel = null): void
+    {
+        if (is_null($accountModel)) {
+            $accountModel = new AccountModel();
+        }
+
+        $accountModel->uuid        = $account->getUuid()->getBytes();
+        $accountModel->user_id     = $account->hasUserId() ? $account->getUserId() : null;
+        $accountModel->date_opened = Serializer::serializeDate($account->getDateOpened());
+        $accountModel->balance     = Serializer::getFloatFromMoney($account->getBalance());
+        $accountModel->interest    = Serializer::getFloatFromMoney($account->getInterest());
+    }
 }
